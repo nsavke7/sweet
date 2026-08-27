@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+/* Nocturne — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #161826;
+  --color-surface: #232532;
+  --color-text: #e9e9ed;
+  --color-accent: #9184d9; /* review round 7 (Barron): the accent moves to
+     the product's blurple — OKLCH hue 289.2, the hue of the app's own Pro
+     accent (#9a8fe0, --om-accent-pro) — at the same lightness the steel
+     accent held (L 0.660, so the documented ratios survive) and chroma
+     in the product blurple's own range (its token sits at C 0.118; the
+     accent takes 0.125, from the old steel's 0.030):
+     the accent now reads as an accent rather than another neutral. */
+  --color-accent-2: #a7a1db; /* the machine-derived stand-in follows: same
+     hue, same L 0.734, chroma at the same 2:3 proportion it held */
+  --color-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role matches the others in visual value. */
+  --color-neutral-100: #f3f5fe;
+  --color-neutral-200: #e4e7f5;
+  --color-neutral-300: #cfd3e5;
+  --color-neutral-400: #b2b6ca;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #75798c;
+  --color-neutral-700: #595d6c;
+  --color-neutral-800: #3f424d;
+  --color-neutral-900: #292b31;
+
+  --color-accent-100: #f5f4ff;
+  --color-accent-200: #e7e5fe;
+  --color-accent-300: #d2cefd;
+  --color-accent-400: #b5abfc;
+  --color-accent-500: #968ae0;
+  --color-accent-600: #796cbf;
+  --color-accent-700: #5d5294;
+  --color-accent-800: #423a6a;
+  --color-accent-900: #2b2741;
+
+  --color-accent-2-100: #f5f4ff;
+  --color-accent-2-200: #e7e5fe;
+  --color-accent-2-300: #d2cefd;
+  --color-accent-2-400: #b5afe8;
+  --color-accent-2-500: #9690c9;
+  --color-accent-2-600: #7972a9;
+  --color-accent-2-700: #5c5783;
+  --color-accent-2-800: #423e5d;
+  --color-accent-2-900: #2b293a;
+
+  /* Deck section-divider ground — review round 3: saturation as presence.
+     Dividers take a saturated deep indigo (hue 277, the neutral ramp's own
+     family; C 0.094 — written when the accent held C 0.030, before the
+     round-7 blurple raised it past the ground's) with a lighter bloom and
+     a ghost tint of the same hue, while the slide grounds stay
+     desaturated. Deck-scale fills only — not interface colors. */
+  --color-section: #262a60;
+  --color-section-glow: #353b80;
+  --color-section-ghost: #4c5397;
+
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-heading-weight: 500;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* Elevation — derived from the ground: soft ink-tinted shadows on a
+     light theme, a hairline edge + ambient darkness on a dark one. */
+  --shadow-sm: 0 0 0 1px #3f424d;
+  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0,0,0,0.55);
+  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0,0,0,0.65);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
+
+.lighten{mix-blend-mode:lighten;background-color:transparent}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Components — built with the tokens above. Plain CSS
+   on plain HTML: no JavaScript, no build step. Each class is documented in
+   readme.md and demonstrated in foundations/ and components/.
+   ══════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; }
+h6 { letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px; margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — rules — */
+/* Rules fade to transparent at both ends instead of stopping cleanly — a
+   Nocturne signature. The ramp is 48px an end (one deck baseline unit),
+   painted from the same divider token. Freestanding rules fade; box
+   outlines, in-control separators, and short accent marks stay solid. */
+.hr {
+  height: 1px; border: 0; margin: var(--space-4) 0;
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent);
+}
+
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text); /* matches the .input's 14px —
+     the pair sits side by side in sign-up rows */
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { color: var(--color-accent); border-color: var(--color-accent); }
+.btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+.btn-primary:active { background: color-mix(in srgb, var(--color-accent) 22%, transparent); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+.btn-block { width: 100%; margin-top: var(--space-2); }
+
+/* — forms — */
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 90px; resize: vertical; }
+.radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+.radio input, .seg-opt input {
+  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+}
+.radio .dot {
+  width: 16px; height: 16px; flex: none; border-radius: 50%;
+  border: 1.5px solid var(--color-divider);
+}
+.radio:hover .dot { border-color: var(--color-accent); }
+.radio input:checked + .dot {
+  border-color: var(--color-accent); background: var(--color-accent);
+  box-shadow: inset 0 0 0 4px var(--color-bg);
+}
+.radio input:focus-visible + .dot { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.seg {
+  display: inline-flex; overflow: hidden;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.seg-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer;
+}
+.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
+.seg-opt:has(input:checked) { color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+/* — cards — */
+.card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface);
+}
+.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); }
+.card-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 17px; line-height: 1.2;
+}
+.card-body { margin: 0; font-size: 13px; opacity: 0.8; flex: 1; }
+.card-meta {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+}
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-accent { background: var(--color-accent-800); color: var(--color-accent-100); }
+.tag-accent-2 { background: var(--color-accent-2-800); color: var(--color-accent-2-100); }
+.tag-neutral { background: var(--color-neutral-800); color: var(--color-neutral-100); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+/* — navigation — */
+.nav {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: none;
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent); }
+
+/* — tables — */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  padding: var(--space-2); border-bottom: 1px solid transparent; /* keeps layout; the row paints the fading rule */
+}
+.table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid transparent;
+}
+/* Row rules as row-level strips so the end-fade spans the row, not each cell. */
+.table thead tr {
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+.table tbody tr {
+  background: linear-gradient(to right,
+    transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+    color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+.table tbody tr:hover {
+  /* the hover tint layers over the row rule, which keeps painting */
+  background:
+    linear-gradient(color-mix(in srgb, var(--color-text) 4%, transparent),
+                    color-mix(in srgb, var(--color-text) 4%, transparent)) no-repeat 0 0 / 100% 100%,
+    linear-gradient(to right,
+      transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+      color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+
+/* — dialog — */
+.dialog-backdrop {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+}
+.dialog {
+  width: min(440px, 100%); display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg);
+}
+.dialog-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 20px;
+}
+.dialog-body { font-size: 14px; opacity: 0.85; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }
+
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #4c4185; color: #f3f1ff; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: var(--color-accent-200); text-decoration: none; }
+  a:hover { color: #ffffff; }
+  ::selection { background: var(--color-accent-700); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  :root {
+    --color-bg: #4c4185;
+    --color-surface: #574a94;
+    --color-text: #f3f1ff;
+    --color-divider: color-mix(in srgb, #f3f1ff 24%, transparent);
+    --shadow-sm: 0 0 0 1px color-mix(in srgb, #f3f1ff 22%, transparent);
+    --shadow-md: 0 0 0 1px color-mix(in srgb, #f3f1ff 34%, transparent), 0 8px 22px rgba(29, 22, 61, 0.28);
+    --shadow-lg: 0 0 0 1px color-mix(in srgb, #f3f1ff 48%, transparent), 0 18px 44px rgba(29, 22, 61, 0.4);
+  }
+  body { background: #4c4185; color: #f3f1ff; }
+  .card { background: var(--color-surface); color: var(--color-text); border: 1px solid color-mix(in srgb, #f3f1ff 20%, transparent); }
+  h1, h2, h3 { color: #ffffff; }
+  .card-body { color: color-mix(in srgb, #f3f1ff 82%, transparent); }
+  .card-kicker { color: var(--color-accent-200); }
+  .card-title { color: var(--color-text); }
+  .tag { font-weight: 500; }
+  @media (max-width: 700px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+    .card { padding: 20px !important; }
+    header > div { padding-left: 20px !important; padding-right: 20px !important; }
+    footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+  @container ss-head (max-width: 700px) {
+    header nav { margin-left: 0 !important; justify-content: flex-start !important; width: 100%; }
+  }
+  @keyframes ss-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#4c4185">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#4c4185"></rect>
+    <circle cx="600" cy="430" r="150" fill="#f3f1ff"></circle>
+    <rect x="585" y="200" width="30" height="90" rx="15" fill="#d2cefd"></rect>
+    <text x="600" y="640" fill="#f3f1ff" font-family="Inter, sans-serif" font-size="86" font-weight="300" letter-spacing="18" text-anchor="middle">SWEET</text>
+  </svg>
+</template>
+
+<div style="min-height: 100vh; background: linear-gradient(180deg, #574a94 0%, #4c4185 40%, #443a78 100%); font-family: var(--font-body); color: var(--color-text); overflow-x: hidden">
+
+  <header style="position: sticky; top: 0; z-index: 40; backdrop-filter: blur(14px); background: color-mix(in srgb, #443a78 88%, transparent); border-bottom: 1px solid var(--color-divider)">
+    <div style="max-width: none; width: 100%; margin: 0; padding: var(--space-6) calc(var(--space-8) * 1.6); container-type: inline-size; container-name: ss-head; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6) calc(var(--space-8) * 1.6)">
+      <a href="#" onClick="{{ goHome }}" style="display: flex; align-items: baseline; gap: var(--space-3); color: var(--color-text); flex: none">
+        <span style="font-family: var(--font-heading); font-weight: 300; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase">Sweet</span>
+        <span style="font-family: var(--font-heading); font-weight: 300; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-accent)">Space</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: calc(var(--space-8) * 1.2); margin-left: auto; flex-wrap: wrap; row-gap: var(--space-3); justify-content: flex-end; font-size: 13.5px; letter-spacing: 0.06em">
+        <a href="#" onClick="{{ goHome }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Naslovna</a>
+        <a href="#" onClick="{{ goUkrasi }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Ukrasi</a>
+        <a href="#" onClick="{{ goTorte }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Torte po meri</a>
+        <a href="#" onClick="{{ goKolaci }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Kolači</a>
+        <a href="#" onClick="{{ goGalerija }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Galerija</a>
+        <a href="#" onClick="{{ goKontakt }}" style="color: color-mix(in srgb, #f3f1ff 80%, transparent); padding-bottom: 3px; border-bottom: 1px solid transparent; white-space: nowrap" style-hover="color: var(--color-accent-200)">Kontakt</a>
+      </nav>
+          </div>
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent-700) 30%, var(--color-accent-700) 70%, transparent); opacity: 0.5"></div>
+  </header>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <sc-if value="{{ heroA }}" hint-placeholder-val="{{ true }}">
+    <section style="position: relative; min-height: 78vh; display: grid">
+      <div style="position: absolute; inset: 0">
+        <image-slot id="ss-hero-a" shape="rect" fit="cover" placeholder="hero — torta na crnoj podlozi"></image-slot>
+      </div>
+      <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, #4c4185 12%, color-mix(in srgb, #4c4185 60%, transparent) 52%, transparent 88%)"></div>
+      <div style="position: relative; max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 4.5) calc(var(--space-8) * 1.6); align-self: center; pointer-events: none">
+        <div style="max-width: 620px; animation: ss-rise 0.7s ease both">
+          <p style="margin: 0 0 var(--space-6); font-size: 12px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--color-accent-200)">Poslastičarnica i shop · Šabac</p>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(44px, 5.6vw, 78px); line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance">Torte, kolači i sve što ide na njih.</h1>
+          <p style="margin: var(--space-8) 0 0; max-width: 46ch; font-size: 17px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent); text-wrap: pretty">Pravimo torte po meri i držimo ukrase koje koriste i profesionalci — šećerna pasta, posipi, boje, topperi i modle. Dostava na teritoriji Šapca je besplatna.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.6); pointer-events: auto">
+            <a href="#" onClick="{{ goUkrasi }}" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Pogledaj ukrase</a>
+            <a href="#" onClick="{{ goTorte }}" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Naruči tortu po meri</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{ heroB }}">
+    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3.4) calc(var(--space-8) * 1.6) calc(var(--space-8) * 2)">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: calc(var(--space-8) * 2.4); align-items: start">
+        <div style="min-width: 0; animation: ss-rise 0.7s ease both">
+          <p style="margin: 0 0 var(--space-8); font-size: 12px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--color-accent-200)">Kneza Lazara 2, Šabac</p>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(46px, 6.4vw, 92px); line-height: 0.98; letter-spacing: -0.03em">Sweet<br>Space</h1>
+          <div style="height: 1px; margin: calc(var(--space-8) * 1.4) 0; background: linear-gradient(90deg, var(--color-accent-700), transparent)"></div>
+          <p style="margin: 0; max-width: 42ch; font-size: 17px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent); text-wrap: pretty">Poslastičarnica i shop za ukrase. Torte po meri, sitni kolači na kilogram i police pune materijala za dekoraciju — na jednom mestu.</p>
+          <div style="display: flex; align-items: center; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.4)">
+            <a href="#" onClick="{{ goTorte }}" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Torte i kolači</a>
+            <a href="#" onClick="{{ goUkrasi }}" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Ukrasi</a>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-6) calc(var(--space-8) * 1.6); margin-top: calc(var(--space-8) * 2.2); font-size: 13px; color: color-mix(in srgb, #f3f1ff 66%, transparent)">
+            <div><div style="font-family: var(--font-heading); font-size: 26px; font-weight: 400; color: var(--color-text)">120+</div>zadovoljnih mušterija</div>
+            <div><div style="font-family: var(--font-heading); font-size: 26px; font-weight: 400; color: var(--color-text)">0 din</div>dostava u Šapcu</div>
+            <a href="{{ waCall }}" target="_blank" class="btn btn-primary" style="align-self: center; white-space: nowrap; padding: var(--space-6) calc(var(--space-8) * 1.3); font-size: 16px; height: auto; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Zakaži poziv</a>
+          </div>
+        </div>
+        <div style="min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-auto-rows: minmax(0, auto); gap: var(--space-4)">
+          <div style="grid-column: span 2; position: relative; aspect-ratio: 16 / 9; min-width: 0"><image-slot id="ss-hero-b1" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_141138_5778cc66-e514-43c5-8981-6f8f9239d4ed.png" placeholder="glavna torta"></image-slot></div>
+          <div style="position: relative; aspect-ratio: 4 / 3; min-width: 0"><image-slot id="ss-hero-b2" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_141524_3760e1c3-7423-48da-b396-25a9ff5362fd.png" placeholder="doboš torta"></image-slot></div>
+          <div style="position: relative; aspect-ratio: 4 / 3; min-width: 0"><image-slot id="ss-hero-b3" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_141150_45abd51c-67ed-4e68-a136-fb5614ce278b.png" placeholder="kolači"></image-slot></div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-8); margin-bottom: calc(var(--space-8) * 1.6)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: 30px; letter-spacing: -0.01em">Tri police, jedan prostor</h2>
+        <a href="#" onClick="{{ goUkrasi }}" style="font-size: 13px; letter-spacing: 0.06em">Ceo asortiman →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
+        <a href="#" onClick="{{ goUkrasi }}" class="card" style="display: flex; flex-direction: column; color: inherit; padding: 0; overflow: hidden" style-hover="box-shadow: var(--shadow-md)">
+          <div style="height: 190px; position: relative"><image-slot id="ss-cat-ukrasi" shape="rect" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142052_e39a6f82-f6ca-415a-a63d-1a9b0e2e461e.png" placeholder="ukrasi — flat lay"></image-slot></div>
+          <div style="padding: calc(var(--space-8) * 1.1); display: flex; flex-direction: column; align-items: flex-start; flex: 1">
+            <div class="card-kicker">Shop</div>
+            <div class="card-title" style="font-weight: 400">Ukrasi za torte</div>
+            <p class="card-body" style="margin: var(--space-3) 0 0">Šećerna pasta, posipi, jestive boje, topperi, modle i svećice. Za kućne i profesionalne pekare.</p>
+            <span class="btn btn-primary" style="margin-top: calc(var(--space-8) * 0.9); white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500">Vidi ukrase</span>
+          </div>
+        </a>
+        <a href="#" onClick="{{ goTorte }}" class="card" style="display: flex; flex-direction: column; color: inherit; padding: 0; overflow: hidden" style-hover="box-shadow: var(--shadow-md)">
+          <div style="height: 190px; position: relative"><image-slot id="ss-cat-torte" shape="rect" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142058_45561064-d9ba-46fe-9b15-5e2465294fe0.png" placeholder="torta po meri"></image-slot></div>
+          <div style="padding: calc(var(--space-8) * 1.1); display: flex; flex-direction: column; align-items: flex-start; flex: 1">
+            <div class="card-kicker">Po meri</div>
+            <div class="card-title" style="font-weight: 400">Torte za proslave</div>
+            <p class="card-body" style="margin: var(--space-3) 0 0">Rođendani, krštenja, svadbe i firme. Dogovor oko ukusa, veličine i dekoracije — pa izrada.</p>
+            <span class="btn btn-primary" style="margin-top: calc(var(--space-8) * 0.9); white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500">Vidi torte</span>
+          </div>
+        </a>
+        <a href="#" onClick="{{ goKolaci }}" class="card" style="display: flex; flex-direction: column; color: inherit; padding: 0; overflow: hidden" style-hover="box-shadow: var(--shadow-md)">
+          <div style="height: 190px; position: relative"><image-slot id="ss-cat-kolaci" shape="rect" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142104_69d29b5e-4ece-4c64-a97f-0d79b91cd2b4.png" placeholder="sitni kolači"></image-slot></div>
+          <div style="padding: calc(var(--space-8) * 1.1); display: flex; flex-direction: column; align-items: flex-start; flex: 1">
+            <div class="card-kicker">Svakog dana</div>
+            <div class="card-title" style="font-weight: 400">Kolači i poslastice</div>
+            <p class="card-body" style="margin: var(--space-3) 0 0">Sitni kolači na kilogram, cheesecake, macarons i sezonski komadi iz vitrine.</p>
+            <span class="btn btn-primary" style="margin-top: calc(var(--space-8) * 0.9); white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500">Vidi kolače</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <sc-if value="{{ showWholesale }}" hint-placeholder-val="{{ true }}">
+    <section style="background: linear-gradient(180deg, #3b3268 0%, #322a5a 100%); border-top: 1px solid color-mix(in srgb, #f3f1ff 22%, transparent); border-bottom: 1px solid color-mix(in srgb, #f3f1ff 22%, transparent)">
+      <div style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.4) calc(var(--space-8) * 1.6); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--space-8) * 2); align-items: center">
+        <div>
+          <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Veleprodaja</p>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(28px, 3vw, 42px); line-height: 1.1; color: #ffffff">Za poslastičarnice i pekare</h2>
+          <p style="margin: var(--space-6) 0 0; max-width: 52ch; font-size: 16px; line-height: 1.65; color: var(--color-accent-100)">Veleprodajne cene od 5 kg šećerne paste i od 10 komada po artiklu. Pošaljite spisak — vraćamo ponudu istog dana.</p>
+        </div>
+        <div style="display: flex; gap: var(--space-4); justify-content: flex-end">
+          <a href="#" onClick="{{ goKontakt }}" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Traži cenovnik</a>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
+      <h2 style="margin: 0 0 calc(var(--space-8) * 1.6); font-family: var(--font-heading); font-weight: 400; font-size: 30px">Iz radionice</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4)">
+        <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-home-g1" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142330_b8effeca-2683-4001-b013-5eb0ce73cfcb.png" placeholder="rad 01"></image-slot></div>
+        <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-home-g2" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142330_02393a79-dab6-4c85-b222-ab89f7b3bc5d.png" placeholder="rad 02"></image-slot></div>
+        <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-home-g3" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142330_b15726b4-f7da-433f-b12a-5efe0cb8a18c.png" placeholder="rad 03"></image-slot></div>
+        <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-home-g4" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142330_52d75522-bb13-4006-91be-5b0cbc58cca1.png" placeholder="rad 04"></image-slot></div>
+      </div>
+    </section>
+
+    <section style="max-width: none; width: 100%; margin: 0; padding: 0 calc(var(--space-8) * 1.6) calc(var(--space-8) * 3)">
+      <div class="card" style="container-type: inline-size; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: calc(var(--space-8) * 1.6); align-items: center; padding: calc(var(--space-8) * 1.6)">
+        <div>
+          <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Naručivanje</p>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(26px, 3vw, 38px); line-height: 1.1">Pozovite i dogovorimo</h2>
+          <p style="margin: var(--space-6) 0 0; max-width: 44ch; font-size: 15.5px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 66%, transparent)">Bez korpe i formulara — dovoljan je jedan poziv ili poruka. Kneza Lazara 2, Šabac.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-6)">
+          <a href="tel:+381644667971" style="font-family: var(--font-heading); font-weight: 300; font-size: clamp(24px, 9cqw, 44px); letter-spacing: -0.01em; color: var(--color-text); white-space: nowrap; max-width: 100%; overflow-wrap: normal" style-hover="color: var(--color-accent-200)">064 466 7971</a>
+          <div style="display: flex; gap: var(--space-4)">
+            <a href="tel:+381644667971" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Pozovi</a>
+            <a href="{{ wa }}" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isUkrasi }}">
+  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+    <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Shop</p>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -0.02em">Ukrasi za torte</h1>
+    <p style="margin: var(--space-6) 0 0; max-width: 56ch; font-size: 16px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Naručivanje ide preko WhatsApp-a ili Instagram poruke — napišite šifru artikla i količinu. Preuzimanje u radnji, dostava u Šapcu besplatna.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin: calc(var(--space-8) * 1.6) 0 calc(var(--space-8) * 1.4)">
+      <sc-for list="{{ kategorije }}" as="k" hint-placeholder-count="6">
+        <button type="button" onClick="{{ k.select }}" class="tag tag-outline" style="cursor: pointer; white-space: nowrap; font-family: var(--font-body); background: {{ k.bg }}; color: {{ k.fg }}; border-color: {{ k.bc }}">{{ k.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-6)">
+      <sc-for list="{{ artikli }}" as="p" hint-placeholder-count="8">
+        <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column">
+          <div style="height: 180px; position: relative"><image-slot id="{{ p.slot }}" shape="rect" src="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot></div>
+          <div style="padding: calc(var(--space-8) * 0.9); display: flex; flex-direction: column; gap: var(--space-2); flex: 1">
+            <div class="card-kicker">{{ p.cat }}</div>
+            <div style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 400; line-height: 1.3">{{ p.name }}</div>
+            <div style="font-size: 12.5px; color: color-mix(in srgb, #f3f1ff 66%, transparent)">{{ p.sku }}</div>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin-top: auto; padding-top: var(--space-4)">
+              <span style="font-family: var(--font-heading); font-size: 17px">{{ p.price }}</span>
+              <a href="{{ wa }}" target="_blank" style="font-size: 12.5px; letter-spacing: 0.06em; white-space: nowrap">Poruči →</a>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <p style="margin: calc(var(--space-8) * 1.6) 0 0; font-size: 13px; color: color-mix(in srgb, #f3f1ff 66%, transparent); font-family: ui-monospace, monospace">Cene su okvirne i treba ih zameniti stvarnim cenovnikom.</p>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isTorte }}">
+  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: calc(var(--space-8) * 2.4); align-items: start">
+      <div>
+        <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Po meri</p>
+        <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -0.02em">Torte za vaš dan</h1>
+        <p style="margin: var(--space-6) 0 0; max-width: 52ch; font-size: 17px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent); text-wrap: pretty">Recite nam povod, broj gostiju i ukus — predlažemo veličinu i dekoraciju. Torte se rade po dogovoru — javite se sa datumom pa potvrđujemo rok.</p>
+
+        <div style="margin-top: calc(var(--space-8) * 2); display: grid; gap: 0">
+          <sc-for list="{{ koraci }}" as="s" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 56px 1fr; gap: var(--space-6); padding: calc(var(--space-8) * 0.9) 0; border-top: 1px solid var(--color-divider)">
+              <span style="font-family: var(--font-heading); font-size: 13px; color: var(--color-accent-600); letter-spacing: 0.1em">{{ s.n }}</span>
+              <div>
+                <div style="font-family: var(--font-heading); font-size: 17px; font-weight: 400">{{ s.t }}</div>
+                <p style="margin: var(--space-2) 0 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, #f3f1ff 66%, transparent)">{{ s.d }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: grid; gap: var(--space-4)">
+        <div style="height: 340px; position: relative"><image-slot id="ss-torte-1" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_144301_463f0c35-e8a3-4e76-ac20-fda59426147d.png" placeholder="svečana torta"></image-slot></div>
+        <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-torte-2" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_144301_b9950efe-bc8c-4f71-82d8-2da85cbc5319.png" placeholder="detalj dekoracije"></image-slot></div>
+      </div>
+    </div>
+
+    <h2 style="margin: calc(var(--space-8) * 2.6) 0 calc(var(--space-8) * 1.2); font-family: var(--font-heading); font-weight: 400; font-size: 26px">Okvirne cene</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
+      <sc-for list="{{ tipovi }}" as="t" hint-placeholder-count="3">
+        <div class="card" style="display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="card-kicker">{{ t.k }}</div>
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 400">{{ t.name }}</div>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, #f3f1ff 66%, transparent)">{{ t.d }}</p>
+          <div style="margin-top: var(--space-4); font-family: var(--font-heading); font-size: 22px">{{ t.price }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: flex; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.6)">
+      <a href="{{ wa }}" target="_blank" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Pošalji upit na WhatsApp</a>
+      <a href="https://instagram.com/" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Instagram poruka</a>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isKolaci }}">
+  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+    <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Vitrina</p>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -0.02em">Kolači i poslastice</h1>
+    <p style="margin: var(--space-6) 0 0; max-width: 54ch; font-size: 16px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Sitni kolači se prodaju na kilogram, ostalo po komadu. Za veće količine (proslave, firme) javite se dan ranije.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6); margin-top: calc(var(--space-8) * 1.8)">
+      <sc-for list="{{ kolaci }}" as="c" hint-placeholder-count="6">
+        <div class="card" style="padding: 0; overflow: hidden">
+          <div style="height: 210px; position: relative"><image-slot id="{{ c.slot }}" shape="rect" placeholder="{{ c.ph }}"></image-slot></div>
+          <div style="padding: calc(var(--space-8) * 1); display: flex; flex-direction: column; gap: var(--space-2)">
+            <div style="font-family: var(--font-heading); font-size: 17px; font-weight: 400">{{ c.name }}</div>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, #f3f1ff 66%, transparent)">{{ c.d }}</p>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-4)">
+              <span style="font-family: var(--font-heading); font-size: 17px">{{ c.price }}</span>
+              <a href="{{ wa }}" target="_blank" style="font-size: 12.5px; white-space: nowrap">Poruči →</a>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isGalerija }}">
+  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+    <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Galerija</p>
+    <h1 style="margin: 0 0 calc(var(--space-8) * 1.8); font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -0.02em">Radovi</h1>
+    <div style="columns: 280px 3; column-gap: var(--space-4)">
+      <sc-for list="{{ galerija }}" as="g" hint-placeholder-count="9">
+        <div style="break-inside: avoid; margin-bottom: var(--space-4); position: relative; height: {{ g.h }}">
+          <image-slot id="{{ g.slot }}" shape="rounded" radius="8" placeholder="{{ g.ph }}"></image-slot>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isKontakt }}">
+  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: calc(var(--space-8) * 2.4)">
+      <div>
+        <p style="margin: 0 0 var(--space-4); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Kontakt</p>
+        <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -0.02em">Naručivanje</h1>
+        <p style="margin: var(--space-6) 0 0; max-width: 46ch; font-size: 17px; line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Nema korpe — pišite nam direktno. Napišite šta vam treba, za koji datum i za koliko ljudi, i potvrdićemo cenu i rok.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.4)">
+          <a href="{{ wa }}" target="_blank" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">WhatsApp</a>
+          <a href="https://instagram.com/" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Instagram</a>
+          <a href="tel:+381644667971" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Pozovi 064 466 7971</a>
+        </div>
+        <div style="margin-top: calc(var(--space-8) * 2); display: grid; gap: 0">
+          <sc-for list="{{ info }}" as="i" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 150px 1fr; gap: var(--space-6); padding: calc(var(--space-8) * 0.8) 0; border-top: 1px solid var(--color-divider); font-size: 15px">
+              <span style="color: color-mix(in srgb, #f3f1ff 66%, transparent); letter-spacing: 0.04em">{{ i.k }}</span>
+              <span style="color: var(--color-accent-100)">{{ i.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="height: 320px; position: relative"><image-slot id="ss-kontakt-1" shape="rounded" radius="8" placeholder="izlog radnje"></image-slot></div>
+        <div class="card" style="margin-top: var(--space-6)">
+          <div class="card-kicker">Veleprodaja</div>
+          <div style="font-family: var(--font-heading); font-size: 19px; font-weight: 400; margin-bottom: var(--space-3)">Radite u poslastičarstvu?</div>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, #f3f1ff 66%, transparent)">Pošaljite spisak artiklâ i mesečne količine — vraćamo veleprodajni cenovnik i uslove plaćanja.</p>
+          <a href="{{ waWholesale }}" target="_blank" class="btn btn-primary" style="align-self: flex-start; margin-top: calc(var(--space-8) * 0.9); white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500" style-hover="background: var(--color-accent-100); border-color: var(--color-accent-100)">Pošalji spisak</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <footer style="border-top: 1px solid var(--color-divider); margin-top: calc(var(--space-8) * 2); background: #443a78">
+    <div style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 1.8) calc(var(--space-8) * 1.6); display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: baseline; justify-content: space-between; font-size: 13.5px; color: color-mix(in srgb, #f3f1ff 66%, transparent)">
+      <span style="font-family: var(--font-heading); letter-spacing: 0.24em; text-transform: uppercase; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Sweet Space</span>
+      <span>Kneza Lazara 2, Šabac · besplatna dostava u Šapcu</span>
+      <span>© 2026 Sweet Space</span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;381644667971&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showWholesale&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;A&quot;,&quot;B&quot;],&quot;default&quot;:&quot;B&quot;,&quot;tsType&quot;:&quot;'A'|'B'&quot;}}">
+class Component extends DCLogic {
+  state = { page: "home", hero: null, cat: "Sve" };
+
+  go(page) {
+    return (e) => { if (e) e.preventDefault(); this.setState({ page }); window.scrollTo(0, 0); };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const hero = s.hero ?? (this.props.heroVariant ?? "B");
+    const wa = "https://wa.me/" + (this.props.whatsapp ?? "381644667971");
+    const cats = ["Sve", "Šećerna pasta", "Posipi", "Jestive boje", "Topperi", "Modle", "Svećice"];
+    const all = [
+      { name: "Šećerna pasta, bela 1 kg", cat: "Šećerna pasta", sku: "SP-100", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_d808ffac-8060-4f9b-8dbe-fbbb81204298.png", price: "980 din", ph: "šećerna pasta" },
+      { name: "Šećerna pasta, pastelni set 4×250 g", cat: "Šećerna pasta", sku: "SP-204", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_6f8f0b64-1b57-4b0c-a425-88ad95208bc4.png", price: "1.290 din", ph: "pasta u boji" },
+      { name: "Posip zvezdice, zlatne 80 g", cat: "Posipi", sku: "PS-311", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_b05e3acb-dca4-421a-b689-c626bb8a1ebc.png", price: "340 din", ph: "posipi" },
+      { name: "Posip mix, pastelni 100 g", cat: "Posipi", sku: "PS-318", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_148f3ab8-3157-4c22-ba5c-7f51be055af0.png", price: "390 din", ph: "posip mix" },
+      { name: "Gel boja, 6 nijansi", cat: "Jestive boje", sku: "JB-402", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_3e467fdb-17f1-4e72-90f4-0e0d37ef76e0.png", price: "1.150 din", ph: "jestive boje" },
+      { name: "Jestiva zlatna boja u spreju", cat: "Jestive boje", sku: "JB-415", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142821_30f947d7-b19c-4241-a019-84c5b5abc1bf.png", price: "760 din", ph: "sprej boja" },
+      { name: "Topper „Srećan rođendan“", cat: "Topperi", sku: "TP-508", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142821_0ce12dd0-bfde-4a13-8d3b-b01adab94b84.png", price: "290 din", ph: "topper" },
+      { name: "Topper brojevi, akril", cat: "Topperi", sku: "TP-512", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_8f91fa3b-bf30-448f-8c94-2799599ae833.png", price: "420 din", ph: "akril topper" },
+      { name: "Modle za cvetiće, set 5", cat: "Modle", sku: "MD-601", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_938ff0ac-899d-4bb9-b197-5c0e503616d0.png", price: "690 din", ph: "modle" },
+      { name: "Modla za latice, silikon", cat: "Modle", sku: "MD-608", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_0fba527f-e7fe-4504-a902-068b01364c4a.png", price: "540 din", ph: "silikonska modla" },
+      { name: "Svećice metalik, 12 kom", cat: "Svećice", sku: "SV-701", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_1532eee1-d371-4f1d-bf97-a39d70ad22de.png", price: "260 din", ph: "svećice" },
+      { name: "Svećica prskalica, 4 kom", cat: "Svećice", sku: "SV-706", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142820_67d013d2-e8a7-4993-8265-175c92395ac3.png", price: "310 din", ph: "prskalice" }
+    ];
+    const active = s.cat;
+    const artikli = all
+      .filter((p) => active === "Sve" || p.cat === active)
+      .map((p, i) => ({ ...p, slot: "ss-art-" + p.sku }));
+
+    const kategorije = cats.map((label) => ({
+      label,
+      select: () => this.setState({ cat: label }),
+      bg: label === active ? "#ffffff" : "transparent",
+      fg: label === active ? "var(--color-accent-700)" : "#f3f1ff",
+      bc: label === active ? "#ffffff" : "color-mix(in srgb, #f3f1ff 45%, transparent)"
+    }));
+
+    return {
+      isHome: s.page === "home", isUkrasi: s.page === "ukrasi", isTorte: s.page === "torte",
+      isKolaci: s.page === "kolaci", isGalerija: s.page === "galerija", isKontakt: s.page === "kontakt",
+      heroA: hero === "A", heroB: hero === "B", wa,
+      waWholesale: wa + "?text=" + encodeURIComponent("Zdravo Sweet Space, poslastičar sam — evo spiska artikala i mesečnih količina:"),
+      waCall: wa + "?text=" + encodeURIComponent("Zdravo Sweet Space, želim da zakažem poziv — kada vam odgovara?"),
+      showWholesale: this.props.showWholesale ?? true,
+      setHeroA: () => this.setState({ hero: "A" }),
+      setHeroB: () => this.setState({ hero: "B" }),
+      aFg: hero === "A" ? "var(--color-accent-200)" : "var(--color-neutral-500)",
+      aBc: hero === "A" ? "var(--color-accent-600)" : "var(--color-neutral-800)",
+      bFg: hero === "B" ? "var(--color-accent-200)" : "var(--color-neutral-500)",
+      bBc: hero === "B" ? "var(--color-accent-600)" : "var(--color-neutral-800)",
+      goHome: this.go("home"), goUkrasi: this.go("ukrasi"), goTorte: this.go("torte"),
+      goKolaci: this.go("kolaci"), goGalerija: this.go("galerija"), goKontakt: this.go("kontakt"),
+      kategorije, artikli,
+      koraci: [
+        { n: "01", t: "Izbor", d: "Kažete povod, datum, broj gostiju i ukus koji volite." },
+        { n: "02", t: "Dogovor", d: "Predlažemo veličinu, dekoraciju i cenu; potvrđujemo rok." },
+        { n: "03", t: "Izrada", d: "Torta se pravi dan pre preuzimanja, od svežih sastojaka." },
+        { n: "04", t: "Preuzimanje", d: "U radnji ili dostava — na teritoriji Šapca besplatno." }
+      ],
+      tipovi: [
+        { k: "Klasika", name: "Jednospratna", d: "Do 3 kg, glatka ili nazubljena obrada, jednostavna dekoracija.", price: "od 2.600 din/kg" },
+        { k: "Svečano", name: "Dvospratna", d: "Za veće proslave, kombinacija ukusa po spratovima.", price: "od 3.200 din/kg" },
+        { k: "Autorski", name: "Skulpturalna", d: "Modelovane figure, cvetne kompozicije, potpuno po ideji.", price: "cena po dogovoru" }
+      ],
+      kolaci: [
+        { name: "Sitni kolači, mix", d: "Osam vrsta u kutiji — vanilice, oblande, mafini, kore.", price: "3.400 din/kg", slot: "ss-k1", ph: "sitni kolači" },
+        { name: "Cheesecake", d: "Klasični pečeni, sa sezonskim voćem.", price: "480 din / kom", slot: "ss-k2", ph: "cheesecake" },
+        { name: "Macarons", d: "Šest ukusa, pakovanje po 6 ili 12 komada.", price: "150 din / kom", slot: "ss-k3", ph: "macarons" },
+        { name: "Ekleri", d: "Punjenje: vanila, čokolada, slani karamel.", price: "220 din / kom", slot: "ss-k4", ph: "ekleri" },
+        { name: "Tartlete sa voćem", d: "Krem od vanile i sveže voće po sezoni.", price: "260 din / kom", slot: "ss-k5", ph: "tartlete" },
+        { name: "Cake pops", d: "Za dečje proslave, u boji po želji.", price: "130 din / kom", slot: "ss-k6", ph: "cake pops" }
+      ],
+      galerija: [
+        { slot: "ss-g1", ph: "svadbena torta", h: "320px" },
+        { slot: "ss-g2", ph: "dečja torta", h: "220px" },
+        { slot: "ss-g3", ph: "detalj cveća", h: "260px" },
+        { slot: "ss-g4", ph: "korporativna torta", h: "300px" },
+        { slot: "ss-g5", ph: "krštenje", h: "240px" },
+        { slot: "ss-g6", ph: "sitni kolači", h: "280px" },
+        { slot: "ss-g7", ph: "topper detalj", h: "200px" },
+        { slot: "ss-g8", ph: "rođendanska torta", h: "300px" },
+        { slot: "ss-g9", ph: "vitrina", h: "230px" }
+      ],
+      info: [
+        { k: "Telefon", v: "064 466 7971" },
+        { k: "Adresa", v: "Kneza Lazara 2, Šabac" },
+        { k: "Dostava", v: "Besplatno na teritoriji Šapca" },
+        { k: "Radno vreme", v: "Pon–Sub 08–20 · Ned 09–14" }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
