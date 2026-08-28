@@ -358,10 +358,10 @@ textarea.input { min-height: 90px; resize: vertical; }
   </svg>
 </template>
 
-<div style="min-height: 100vh; background: linear-gradient(180deg, #574a94 0%, #4c4185 40%, #443a78 100%); font-family: var(--font-body); color: var(--color-text); overflow-x: hidden">
+<div style="min-height: 100vh; background: linear-gradient(180deg, #574a94 0%, #4c4185 40%, #443a78 100%); font-family: var(--font-body); color: var(--color-text); overflow-x: clip">
 
   <header style="position: sticky; top: 0; z-index: 40; backdrop-filter: blur(14px); background: color-mix(in srgb, #443a78 88%, transparent); border-bottom: 1px solid var(--color-divider)">
-    <div style="max-width: none; width: 100%; margin: 0; padding: var(--space-6) calc(var(--space-8) * 1.6); container-type: inline-size; container-name: ss-head; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6) calc(var(--space-8) * 1.6)">
+    <div style="max-width: 1560px; width: 100%; margin: 0 auto; padding: var(--space-6) calc(var(--space-8) * 3.2); container-type: inline-size; container-name: ss-head; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6) calc(var(--space-8) * 1.6)">
       <a href="#" onClick="{{ goHome }}" style="display: flex; align-items: baseline; gap: var(--space-3); color: var(--color-text); flex: none">
         <span style="font-family: var(--font-heading); font-weight: 300; font-size: clamp(26.8px, 2.07vw, 37px); letter-spacing: 0.24em; text-transform: uppercase">Sweet</span>
         <span style="font-family: var(--font-heading); font-weight: 300; font-size: clamp(26.8px, 2.07vw, 37px); letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-accent)">Space</span>
@@ -386,7 +386,7 @@ textarea.input { min-height: 90px; resize: vertical; }
         <image-slot id="ss-hero-a" shape="rect" fit="cover" placeholder="hero — torta na crnoj podlozi"></image-slot>
       </div>
       <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, #4c4185 12%, color-mix(in srgb, #4c4185 60%, transparent) 52%, transparent 88%)"></div>
-      <div style="position: relative; max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 4.5) calc(var(--space-8) * 1.6); align-self: center; pointer-events: none">
+      <div style="position: relative; max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 4.5) calc(var(--space-8) * 1.6); align-self: center; pointer-events: none">
         <div style="max-width: 620px; animation: ss-rise 0.7s ease both">
           <p style="margin: 0 0 var(--space-6); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.34em; text-transform: uppercase; color: var(--color-accent-200)">Poslastičarnica i shop · Šabac</p>
           <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(53.7px, 6.83vw, 95px); line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance">Torte, kolači i sve što ide na njih.</h1>
@@ -401,13 +401,13 @@ textarea.input { min-height: 90px; resize: vertical; }
     </sc-if>
 
     <sc-if value="{{ heroB }}">
-    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3.4) calc(var(--space-8) * 1.6) calc(var(--space-8) * 2)">
+    <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 3.4) calc(var(--space-8) * 1.6) calc(var(--space-8) * 2)">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--space-8) * 2.4); align-items: center">
         <div style="min-width: 0; animation: ss-rise 0.7s ease both">
           <p style="margin: 0 0 var(--space-8); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.34em; text-transform: uppercase; color: var(--color-accent-200)">Kneza Lazara 2, Šabac</p>
           <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(56.1px, 10.25vw, 205px); line-height: 0.94; letter-spacing: -0.035em">Sweet<br>Space</h1>
           <div style="height: 1px; margin: calc(var(--space-8) * 1.4) 0; background: linear-gradient(90deg, var(--color-accent-700), transparent)"></div>
-          <p style="margin: 0; max-width: 42ch; font-size: clamp(20.7px, 1.65vw, 32px); line-height: 1.6; color: color-mix(in srgb, #f3f1ff 80%, transparent); text-wrap: pretty">Poslastičarnica i shop za ukrase. Torte po meri, sitni kolači na kilogram i police pune materijala za dekoraciju — na jednom mestu.</p>
+          <p style="margin: 0; max-width: 42ch; font-size: clamp(20.7px, 1.65vw, 32px); line-height: 1.6; color: color-mix(in srgb, #f3f1ff 80%, transparent); text-wrap: pretty">Poslastičarnica i shop za ukrase. Torte po meri, sitni kolači na kilogram i police pune materijala za dekoraciju — sve na jednom mestu.</p>
           <div style="display: flex; align-items: center; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.4)">
             <a href="#" onClick="{{ goTorte }}" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Torte i kolači</a>
             <a href="#" onClick="{{ goUkrasi }}" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Ukrasi</a>
@@ -427,7 +427,7 @@ textarea.input { min-height: 90px; resize: vertical; }
     </section>
     </sc-if>
 
-    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
+    <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
       <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-8); margin-bottom: calc(var(--space-8) * 1.6)">
         <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(36.6px, 3.17vw, 59px); letter-spacing: -0.01em">Tri police, jedan prostor</h2>
         <a href="#" onClick="{{ goUkrasi }}" style="font-size: clamp(15.9px, 1.16vw, 20px); letter-spacing: 0.06em">Ceo asortiman →</a>
@@ -465,7 +465,7 @@ textarea.input { min-height: 90px; resize: vertical; }
 
     <sc-if value="{{ showWholesale }}" hint-placeholder-val="{{ true }}">
     <section style="background: linear-gradient(180deg, #3b3268 0%, #322a5a 100%); border-top: 1px solid color-mix(in srgb, #f3f1ff 22%, transparent); border-bottom: 1px solid color-mix(in srgb, #f3f1ff 22%, transparent)">
-      <div style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.4) calc(var(--space-8) * 1.6); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--space-8) * 2); align-items: center">
+      <div style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.4) calc(var(--space-8) * 1.6); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--space-8) * 2); align-items: center">
         <div>
           <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Veleprodaja</p>
           <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(34.2px, 3.66vw, 51px); line-height: 1.1; color: #ffffff">Za poslastičarnice i pekare</h2>
@@ -473,12 +473,13 @@ textarea.input { min-height: 90px; resize: vertical; }
         </div>
         <div style="display: flex; gap: var(--space-4); justify-content: flex-end">
           <a href="#" onClick="{{ goKontakt }}" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Traži cenovnik</a>
+          <a href="#" onClick="{{ goUkrasi }}" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: #ffffff; color: #ffffff">Pogledaj ponudu</a>
         </div>
       </div>
     </section>
     </sc-if>
 
-    <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
+    <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 3) calc(var(--space-8) * 1.6)">
       <h2 style="margin: 0 0 calc(var(--space-8) * 1.6); font-family: var(--font-heading); font-weight: 400; font-size: clamp(36.6px, 3.17vw, 59px)">Iz radionice</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4)">
         <div style="aspect-ratio: 3 / 2; position: relative; min-width: 0"><image-slot id="ss-home-g1" shape="rounded" radius="8" src="https://d8j0ntlcm91z4.cloudfront.net/user_3IJK95KBky8W2Adx3iaAv4phacB/hf_20260825_142330_b8effeca-2683-4001-b013-5eb0ce73cfcb.png" placeholder="rad 01"></image-slot></div>
@@ -488,18 +489,18 @@ textarea.input { min-height: 90px; resize: vertical; }
       </div>
     </section>
 
-    <section style="max-width: none; width: 100%; margin: 0; padding: 0 calc(var(--space-8) * 1.6) calc(var(--space-8) * 3)">
-      <div class="card" style="container-type: inline-size; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: calc(var(--space-8) * 1.6); align-items: center; padding: calc(var(--space-8) * 1.6)">
+    <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: 0 calc(var(--space-8) * 1.6) calc(var(--space-8) * 3)">
+      <div class="card" style="container-type: inline-size; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: calc(var(--space-8) * 1.6); align-items: center; padding: calc(var(--space-8) * 1.6) calc(var(--space-8) * 3.2)">
         <div>
           <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Naručivanje</p>
           <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(31.7px, 3.66vw, 46px); line-height: 1.1">Pozovite i dogovorimo</h2>
-          <p style="margin: var(--space-6) 0 0; max-width: 44ch; font-size: clamp(18.9px, 1.4vw, 24px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 66%, transparent)">Bez korpe i formulara — dovoljan je jedan poziv ili poruka. Kneza Lazara 2, Šabac.</p>
+          <p style="margin: var(--space-6) 0 0; max-width: 44ch; font-size: clamp(18.9px, 1.4vw, 24px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 66%, transparent)">Dovoljan je jedan poziv ili poruka. Kneza Lazara 2, Šabac.</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-6)">
           <a href="tel:+381644667971" style="font-family: var(--font-heading); font-weight: 300; font-size: clamp(24px, 9cqw, 44px); letter-spacing: -0.01em; color: var(--color-text); white-space: nowrap; max-width: 100%; overflow-wrap: normal" style-hover="color: var(--color-accent-200)">064 466 7971</a>
           <div style="display: flex; gap: var(--space-4)">
             <a href="tel:+381644667971" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">Pozovi</a>
-            <a href="{{ wa }}" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">WhatsApp</a>
+            <a href="{{ wa }}" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100); display: inline-flex; align-items: center; gap: 0.55em; " style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)"><svg viewBox="0 0 256 256" width="1.15em" height="1.15em" fill="currentColor" aria-hidden="true" style="flex: none"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.81-14.7a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,215.94l12.42-37.27a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg>WhatsApp</a>
           </div>
         </div>
       </div>
@@ -508,7 +509,7 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <sc-if value="{{ isUkrasi }}">
-  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+  <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
     <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Shop</p>
     <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(43.9px, 5.37vw, 73px); letter-spacing: -0.02em">Ukrasi za torte</h1>
     <p style="margin: var(--space-6) 0 0; max-width: 56ch; font-size: clamp(19.5px, 1.46vw, 26px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Naručivanje ide preko WhatsApp-a ili Instagram poruke — napišite šifru artikla i količinu. Preuzimanje u radnji, dostava u Šapcu besplatna.</p>
@@ -541,7 +542,7 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <sc-if value="{{ isTorte }}">
-  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+  <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: calc(var(--space-8) * 2.4); align-items: start">
       <div>
         <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Po meri</p>
@@ -585,7 +586,7 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <sc-if value="{{ isKolaci }}">
-  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+  <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
     <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Vitrina</p>
     <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(43.9px, 5.37vw, 73px); letter-spacing: -0.02em">Kolači i poslastice</h1>
     <p style="margin: var(--space-6) 0 0; max-width: 54ch; font-size: clamp(19.5px, 1.46vw, 26px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Sitni kolači se prodaju na kilogram, ostalo po komadu. Za veće količine (proslave, firme) javite se dan ranije.</p>
@@ -608,7 +609,7 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <sc-if value="{{ isGalerija }}">
-  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+  <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
     <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Galerija</p>
     <h1 style="margin: 0 0 calc(var(--space-8) * 1.8); font-family: var(--font-heading); font-weight: 300; font-size: clamp(43.9px, 5.37vw, 73px); letter-spacing: -0.02em">Radovi</h1>
     <div style="columns: 280px 3; column-gap: var(--space-4)">
@@ -622,15 +623,15 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <sc-if value="{{ isKontakt }}">
-  <section style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
+  <section style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 2.6) calc(var(--space-8) * 1.6)">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: calc(var(--space-8) * 2.4)">
       <div>
         <p style="margin: 0 0 var(--space-4); font-size: clamp(14.6px, 1.1vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-200)">Kontakt</p>
         <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 300; font-size: clamp(43.9px, 5.37vw, 73px); letter-spacing: -0.02em">Naručivanje</h1>
-        <p style="margin: var(--space-6) 0 0; max-width: 46ch; font-size: clamp(20.7px, 1.59vw, 28px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Nema korpe — pišite nam direktno. Napišite šta vam treba, za koji datum i za koliko ljudi, i potvrdićemo cenu i rok.</p>
+        <p style="margin: var(--space-6) 0 0; max-width: 46ch; font-size: clamp(20.7px, 1.59vw, 28px); line-height: 1.65; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Pišite nam direktno. Napišite šta vam treba, za koji datum i za koliko ljudi, i potvrdićemo cenu i rok.</p>
         <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: calc(var(--space-8) * 1.4)">
-          <a href="{{ wa }}" target="_blank" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500;" style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)">WhatsApp</a>
-          <a href="https://instagram.com/" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Instagram</a>
+          <a href="{{ wa }}" target="_blank" class="btn btn-primary" style="white-space: nowrap; background: #ffffff; border-color: #ffffff; color: var(--color-accent-700); font-weight: 500; display: inline-flex; align-items: center; gap: 0.55em; " style-hover="background: var(--color-accent-500); border-color: var(--color-accent-600)"><svg viewBox="0 0 256 256" width="1.15em" height="1.15em" fill="currentColor" aria-hidden="true" style="flex: none"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.81-14.7a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,215.94l12.42-37.27a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg>WhatsApp</a>
+          <a href="https://instagram.com/" target="_blank" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100); display: inline-flex; align-items: center; gap: 0.55em; " style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)"><svg viewBox="0 0 256 256" width="1.15em" height="1.15em" fill="currentColor" aria-hidden="true" style="flex: none"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg>Instagram</a>
           <a href="tel:+381644667971" class="btn btn-ghost" style="white-space: nowrap; border: 1px solid color-mix(in srgb, #f3f1ff 45%, transparent); color: var(--color-accent-100)" style-hover="border-color: var(--color-accent-500); color: var(--color-accent-200)">Pozovi 064 466 7971</a>
         </div>
         <div style="margin-top: calc(var(--space-8) * 2); display: grid; gap: 0">
@@ -656,10 +657,38 @@ textarea.input { min-height: 90px; resize: vertical; }
   </sc-if>
 
   <footer style="border-top: 1px solid var(--color-divider); margin-top: calc(var(--space-8) * 2); background: #443a78">
-    <div style="max-width: none; width: 100%; margin: 0; padding: calc(var(--space-8) * 1.8) calc(var(--space-8) * 1.6); display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: baseline; justify-content: space-between; font-size: clamp(16.5px, 1.22vw, 21px); color: color-mix(in srgb, #f3f1ff 66%, transparent)">
-      <span style="font-family: var(--font-heading); letter-spacing: 0.24em; text-transform: uppercase; color: color-mix(in srgb, #f3f1ff 80%, transparent)">Sweet Space</span>
-      <span>Kneza Lazara 2, Šabac · besplatna dostava u Šapcu</span>
-      <span>© 2026 Sweet Space</span>
+    <div style="max-width: 1560px; width: 100%; margin: 0 auto; padding: calc(var(--space-8) * 1.8) calc(var(--space-8) * 3.2); display: flex; flex-wrap: wrap; gap: calc(var(--space-8) * 1.6); align-items: flex-start; justify-content: space-between; font-size: clamp(15px, 1.1vw, 19px); color: color-mix(in srgb, #f3f1ff 70%, transparent)">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4); min-width: 240px; max-width: 34ch">
+        <span style="font-family: var(--font-heading); font-size: clamp(22px, 1.7vw, 30px); letter-spacing: 0.24em; text-transform: uppercase; color: #ffffff">Sweet Space</span>
+        <p style="margin: 0; line-height: 1.6">Poslastičarnica i shop za ukrase u Šapcu. Torte po meri, sitni kolači i materijal za dekoraciju — na jednom mestu.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); min-width: 160px">
+        <span style="font-size: clamp(13px, 0.95vw, 16px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent-200)">Ponuda</span>
+        <a href="#" onClick="{{ goUkrasi }}">Ukrasi za torte</a>
+        <a href="#" onClick="{{ goTorte }}">Torte po meri</a>
+        <a href="#" onClick="{{ goKolaci }}">Kolači i poslastice</a>
+        <a href="#" onClick="{{ goGalerija }}">Galerija radova</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); min-width: 200px">
+        <span style="font-size: clamp(13px, 0.95vw, 16px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent-200)">Kontakt</span>
+        <a href="tel:+381644667971">064 466 7971</a>
+        <a href="{{ wa }}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.55em; "><svg viewBox="0 0 256 256" width="1.15em" height="1.15em" fill="currentColor" aria-hidden="true" style="flex: none"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.81-14.7a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,215.94l12.42-37.27a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg>WhatsApp poruka</a>
+        <a href="https://instagram.com/" target="_blank" style="display: inline-flex; align-items: center; gap: 0.55em; "><svg viewBox="0 0 256 256" width="1.15em" height="1.15em" fill="currentColor" aria-hidden="true" style="flex: none"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg>Instagram</a>
+        <span>Kneza Lazara 2, Šabac</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); min-width: 200px">
+        <span style="font-size: clamp(13px, 0.95vw, 16px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent-200)">Radno vreme</span>
+        <span>Ponedeljak – petak · 09 – 19</span>
+        <span>Subota · 09 – 15</span>
+        <span style="color: #ffffff">Besplatna dostava u Šapcu</span>
+      </div>
+    </div>
+    <div style="max-width: 1560px; width: 100%; margin: 0 auto; padding: 0 calc(var(--space-8) * 3.2) calc(var(--space-8) * 1.6)">
+      <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent-700) 30%, var(--color-accent-700) 70%, transparent); opacity: 0.6; margin-bottom: calc(var(--space-8) * 1.1)"></div>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: space-between; font-size: clamp(13px, 0.95vw, 16px); color: color-mix(in srgb, #f3f1ff 55%, transparent)">
+        <span>© 2026 Sweet Space</span>
+        <span>Naručivanje preko telefona, WhatsApp-a ili Instagram poruke</span>
+      </div>
     </div>
   </footer>
 
@@ -756,7 +785,7 @@ class Component extends DCLogic {
         { k: "Telefon", v: "064 466 7971" },
         { k: "Adresa", v: "Kneza Lazara 2, Šabac" },
         { k: "Dostava", v: "Besplatno na teritoriji Šapca" },
-        { k: "Radno vreme", v: "Pon–Sub 08–20 · Ned 09–14" }
+        { k: "Radno vreme", v: "Pon–pet 09–19 · Sub 09–15" }
       ]
     };
   }
